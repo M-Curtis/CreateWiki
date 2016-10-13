@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
-using log4net.Appender;
-using Microsoft.VisualBasic.FileIO;
 
 namespace CreateWiki
 {
@@ -133,8 +130,12 @@ namespace CreateWiki
             Console.WriteLine("Writing data..");
             foreach (var company in companies)
             {
+                company.name = company.name.Replace("(", "");
+                company.name = company.name.Replace(")", "");
+                company.name = company.name.Replace("&", "and");
+                company.name = company.name.Replace("@", "at");
                 string curfile = AppDomain.CurrentDomain.BaseDirectory + $"/companies/{company.name.ToLower()}.txt";
-                if (ContainsinvalidChars(Path.GetFileName(curfile)) && !File.Exists(curfile) )
+                if (ContainsinvalidChars(Path.GetFileName(curfile)) && !File.Exists(curfile))
                 {
                     using (var fs = new FileStream(curfile, FileMode.Create, FileAccess.Write))
                     {
@@ -150,43 +151,43 @@ namespace CreateWiki
                             sw.WriteLine();
                             if (company.product0 != "")
                             {
-                                sw.WriteLine(company.product0);
+                                sw.WriteLine(company.product0 + @"\\");
                             }
                             if (company.product1 != "")
                             {
-                                sw.WriteLine(company.product1);
+                                sw.WriteLine(company.product1 + @"\\");
                             }
                             if (company.product2 != "")
                             {
-                                sw.WriteLine(company.product2);
+                                sw.WriteLine(company.product2 + @"\\");
                             }
                             if (company.product3 != "")
                             {
-                                sw.WriteLine(company.product3);
+                                sw.WriteLine(company.product3 + @"\\");
                             }
                             if (company.product4 != "")
                             {
-                                sw.WriteLine(company.product4);
+                                sw.WriteLine(company.product4 + @"\\");
                             }
                             if (company.product5 != "")
                             {
-                                sw.WriteLine(company.product5);
+                                sw.WriteLine(company.product5 + @"\\");
                             }
                             if (company.product6 != "")
                             {
-                                sw.WriteLine(company.product6);
+                                sw.WriteLine(company.product6 + @"\\");
                             }
                             if (company.product7 != "")
                             {
-                                sw.WriteLine(company.product7);
+                                sw.WriteLine(company.product7 + @"\\");
                             }
                             if (company.product8 != "")
                             {
-                                sw.WriteLine(company.product8);
+                                sw.WriteLine(company.product8 + @"\\");
                             }
                             if (company.product9 != "")
                             {
-                                sw.WriteLine(company.product9);
+                                sw.WriteLine(company.product9 + @"\\");
                             }
                             sw.WriteLine();
                             sw.WriteLine("===== Contacts =====");
@@ -202,7 +203,6 @@ namespace CreateWiki
                         }
                     }
                 }
-               
             }
             Console.WriteLine("done");
             Console.ReadKey();
